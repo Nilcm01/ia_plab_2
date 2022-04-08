@@ -38,10 +38,21 @@ class KMeans:
         ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
         ##  AND CHANGE FOR YOUR OWN CODE
         #######################################################
-        self.X = np.random.rand(100, 5)
+        # self.X = np.random.rand(100, 5)
+
+        """1r: Assegurar-se que tots els valors siguin de tipus float"""
+        # codi
+
+        """
+        2n: Si cal, converteix les dades a una matriu de només dues dimensions NxD
+        Si l'entrada és una imatge en matriu de dimensions FxCx3 llavors:
+        -> transformar-la i retornar els píxels en una matriu de Nx3 i guarda-la
+        a la variable X: self.X
+        """
+        # codi
 
 
-
+    # FET (hi podem afegir més si escau)
     def _init_options(self, options=None):
         """
         Initialization of options in case some fields are left undefined
@@ -80,13 +91,27 @@ class KMeans:
         ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
         ##  AND CHANGE FOR YOUR OWN CODE
         #######################################################
-        if self.options['km_init'].lower() == 'first':
-            self.centroids = np.random.rand(self.K, self.X.shape[1])
-            self.old_centroids = np.random.rand(self.K, self.X.shape[1])
-        else:
-            self.centroids = np.random.rand(self.K, self.X.shape[1])
-            self.old_centroids =np.random.rand(self.K, self.X.shape[1])
+        #if self.options['km_init'].lower() == 'first':
+        #    self.centroids = np.random.rand(self.K, self.X.shape[1])
+        #    self.old_centroids = np.random.rand(self.K, self.X.shape[1])
+        #else:
+        #    self.centroids = np.random.rand(self.K, self.X.shape[1])
+        #    self.old_centroids =np.random.rand(self.K, self.X.shape[1])
 
+        """
+        Inicialitza centroids i old_centroids
+        Les dues variables tenen mida KxD, on:
+            K => Nº de centroides passats a la classe KMeans
+            D => Nº de canals
+        
+        Opcions:
+            First: assigna als centroides els primers K punts de la imatge X
+                    que siguin diferents entre ells. (opció per defecte)
+            Random: triarà, de forma que no es repeteixin, centroides a l'atzar.
+            Custom: seguir qualsevol política de selecció inicial que vulguem
+        """
+
+        # codi
 
     def get_labels(self):
         """        Calculates the closest centroid of all points in X
