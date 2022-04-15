@@ -1,4 +1,4 @@
-__authors__ = ['1565175','',]
+__authors__ = ['1565175','1566740',]
 __group__ = 'DM.10'
 
 from random import random
