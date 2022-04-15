@@ -9,6 +9,8 @@ from scipy.spatial.distance import cdist
 class KNN:
     def __init__(self, train_data, labels):
 
+        self.test_data = None
+        self.neighbors = None
         self._init_train(train_data)
         self.labels = np.array(labels)
         #############################################################
@@ -22,11 +24,9 @@ class KNN:
         :param train_data: PxMxNx3 matrix corresponding to P color images
         :return: assigns the train set to the matrix self.train_data shaped as PxD (P points in a D dimensional space)
         """
-        #######################################################
-        ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
-        ##  AND CHANGE FOR YOUR OWN CODE
-        #######################################################
-        self.train_data = np.random.randint(8,size=[10,14400])
+
+        self.train_data = train_data.reshape(train_data.shape[0], 14400)
+        self.train_data = self.train_data.astype('float64')
 
 
     def get_k_neighbours(self, test_data, k):
@@ -37,12 +37,28 @@ class KNN:
         :return: the matrix self.neighbors is created (NxK)
                  the ij-th entry is the j-th nearest train point to the i-th test point
         """
-        #######################################################
-        ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
-        ##  AND CHANGE FOR YOUR OWN CODE
-        #######################################################
-        self.neighbors = np.random.randint(k, size=[test_data.shape[0],k])
 
+        #reshape of test_data array
+        test_data = test_data.reshape(test_data.shape[0], 14400)
+        test_data = test_data.astype('float64')
+        self.test_data = test_data
+
+        #distances between test_data and train_data
+        distances = cdist(test_data, self.train_data, 'euclidean')
+
+        self.neighbors = np.array
+        self.neighbors = np.resize(self.neighbors, (test_data.shape[0], k))
+
+        x = np.array
+        x = np.resize(x, (test_data.shape[0], k))
+        for i in range(distances.shape[0]):
+            for j in range(k):
+                x[i][j] = np.where(distances[i] == distances[i].min())[0]
+                distances[i][x[i][j]] = np.inf
+
+        for i in range(distances.shape[0]):
+            for j in range(k):
+                self.neighbors[i][j] = self.labels[x[i][j]]
 
     def get_class(self):
         """
@@ -56,15 +72,15 @@ class KNN:
         ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
         ##  AND CHANGE FOR YOUR OWN CODE
         #######################################################
-        return np.random.randint(10, size=self.neighbors.size), np.random.random(self.neighbors.size)
 
+        pass
 
     def predict(self, test_data, k):
         """
         predicts the class at which each element in test_data belongs to
         :param test_data: array that has to be shaped to a NxD matrix ( N points in a D dimensional space)
         :param k:         :param k:  the number of neighbors to look at
-        :return: the output form get_class (2 Nx1 vector, 1st the classm 2nd the  % of votes it got
+        :return: the output form get_class (2 Nx1 vector, 1st the class 2nd the  % of votes it got
         """
 
 
