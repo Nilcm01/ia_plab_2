@@ -46,6 +46,7 @@ class KNN:
         self.neighbors = np.array
         self.neighbors = np.resize(self.neighbors, (test_data.shape[0], k))
 
+        # segons l'index de la distancia més petita a distances, agafa la etiqueta de self.labels
         x = np.array
         x = np.resize(x, (test_data.shape[0], k))
         for i in range(distances.shape[0]):
@@ -65,19 +66,18 @@ class KNN:
                             (i.e. the class at which that row belongs)
                 2nd array For each of the rows in self.neighbors gets the % of votes for the winning class
         """
-        #######################################################
-        ##  YOU MUST REMOVE THE REST OF THE CODE OF THIS FUNCTION
-        ##  AND CHANGE FOR YOUR OWN CODE
-        #######################################################
 
         most_voted_values = np.array
-
+        # per cada fila de la matriu neighbors, mira quins son els elements que més apareixen
+        # guarda els indexs a most_voted_index
         for i in self.neighbors:
             dic = dict()
             for index, v in enumerate(i):
                 dic[index] = np.count_nonzero(i == v)
             most_voted = max(dic.values())
             most_voted_index = [k for k, v in dic.items() if v == most_voted]
+
+            # si hi ha empat de vots, agafa la etiqueta per ordre alfabètic
             if len(most_voted_index) != 1:
                 x = []
                 for j in most_voted_index:
