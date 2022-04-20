@@ -95,6 +95,7 @@ class KNN:
         :param k:         :param k:  the number of neighbors to look at
         :return: the output form get_class (2 Nx1 vector, 1st the class 2nd the  % of votes it got
         """
+        self.get_k_neighbours(test_data, k)
+        class_predict = self.get_class()
 
-
-        return np.random.randint(10, size=self.neighbors.size), np.random.random(self.neighbors.size)
+        return class_predict
