@@ -1,4 +1,4 @@
-__authors__ = ['1565175', '1566740', ]
+__authors__ = ['1565175', '1566740']
 __group__ = 'DM.10'
 
 import numpy as np
@@ -24,8 +24,7 @@ class KNN:
         :return: assigns the train set to the matrix self.train_data shaped as PxD (P points in a D dimensional space)
         """
 
-        self.train_data = train_data.reshape(train_data.shape[0], 14400)
-        self.train_data = self.train_data.astype('float64')
+        self.train_data = train_data.reshape(train_data.shape[0], 14400).astype('float64')
 
     def get_k_neighbours(self, test_data, k):
         """
@@ -36,11 +35,10 @@ class KNN:
                  the ij-th entry is the j-th nearest train point to the i-th test point
         """
 
-        # reshape of test_data array
-        test_data = test_data.reshape(test_data.shape[0], 14400)
-        test_data = test_data.astype('float64')
+        # Reshape of test_data array
+        test_data = test_data.reshape(test_data.shape[0], 14400).astype('float64')
 
-        # distances between test_data and train_data
+        # Distances between test_data and train_data
         distances = cdist(test_data, self.train_data, 'euclidean')
 
         self.neighbors = np.array
@@ -68,6 +66,7 @@ class KNN:
         """
 
         most_voted_values = np.array
+
         # per cada fila de la matriu neighbors, mira quins son els elements que més apareixen
         # guarda els indexs a most_voted_index
         for i in self.neighbors:
@@ -95,7 +94,6 @@ class KNN:
         :param k:         :param k:  the number of neighbors to look at
         :return: the output form get_class (2 Nx1 vector, 1st the class 2nd the  % of votes it got
         """
+        
         self.get_k_neighbours(test_data, k)
-        class_predict = self.get_class()
-
-        return class_predict
+        return self.get_class()
