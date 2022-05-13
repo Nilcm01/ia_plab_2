@@ -114,8 +114,7 @@ class KMeans:
             Custom: seguir qualsevol política de selecció inicial que vulguem
         """
 
-        # if km_init options is first -> assign the first different K points of X
-        # else -> assign random centroids
+        # Assign the first different K points of X
         if self.options['km_init'] == 'first':
 
             # Create a matrix to store al unique centroids
@@ -157,7 +156,7 @@ class KMeans:
             self.old_centroids = np.empty(shape = (self.K, 3))
 
         # Random assigned centroids
-        else:
+        elif self.options['km_init'] == 'random':
 
             # Save shape for new matrixes
             shape = self.X.shape[1]
@@ -167,6 +166,14 @@ class KMeans:
 
             # Save random assigned centroids to centroids matrix
             self.centroids = random(self.K, shape)
+
+        # Custom assignation
+        elif self.options['km_init'] == 'custom':
+            pass
+
+        # No assignation defined or not
+        else:
+            pass
 
 
     # DONE + COMMENTED
