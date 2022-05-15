@@ -26,15 +26,18 @@ def retrieval_by_shape(imgs, labels, pregunta):
 
 
 def get_shape_accuracy(labels, ground_truth):
-    correctes = (labels == ground_truth)
-    return 100*sum(correctes)/len(correctes)
+    arr = (labels == ground_truth)
+    sum = np.count_nonzero(arr)
+    len = arr.shape[0]
+    return 100*sum/len
 
 
 knn = KNN(train_imgs, train_class_labels)
-preds = knn.predict(test_imgs, 2)
+for i in range(1, 10):
+    preds = knn.predict(test_imgs, i)
+    percent_correctes = get_shape_accuracy(preds, test_class_labels)
+    print(percent_correctes)
 
 imgs = retrieval_by_shape(test_imgs, preds, 'Flip Flops')
 visualize_retrieval(imgs, len(imgs))
 
-percent_correctes = get_shape_accuracy(preds, test_class_labels)
-print(percent_correctes)

@@ -69,6 +69,12 @@ class KNN:
 
         # per cada fila de la matriu neighbors, mira quins son els elements que més apareixen
         # guarda els indexs a most_voted_index
+        # si k == 1, neighbors ja són las labels que busquem
+        if self.neighbors.shape[1] <= 1:
+            labels = np.resize(self.neighbors, (self.neighbors.shape[0],))
+            for i in range(len(self.neighbors)):
+                labels[i] = self.neighbors[i]
+            return labels
         for i in self.neighbors:
             dic = dict()
             for index, v in enumerate(i):
