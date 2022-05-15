@@ -319,7 +319,7 @@ class KMeans:
                 self.whitinClassDistance()
 
                 # 100 minus the percentual diference of WCD is less than 20 -> end
-                if 100 - (100 * (self.WCD/oldWCD)) < 20:
+                if 100 - (100 * (self.WCD/oldWCD)) < 80:
 
                     # Save K as the index minus 1
                     self.K = i - 1
